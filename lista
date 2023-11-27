@@ -1,0 +1,74 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Lista {
+    vector<int> numeros;
+
+    void inserirNumero(int numero, int posicao) {
+        if (posicao >= 0 && posicao <= numeros.size()) {
+            numeros.insert(numeros.begin() + posicao, numero);
+            cout << "Número inserido com sucesso!" << endl;
+        } else {
+            cout << "Posição inválida. Insira uma posição entre 0 e " << numeros.size() << "." << endl;
+        }
+    }
+
+    void removerNumero(int posicao) {
+        if (posicao >= 0 && posicao < numeros.size()) {
+            numeros.erase(numeros.begin() + posicao);
+            cout << "Número removido com sucesso!" << endl;
+        } else {
+            cout << "Posição inválida. Insira uma posição entre 0 e " << numeros.size() - 1 << "." << endl;
+        }
+    }
+
+    void imprimirLista() const {
+        if (numeros.empty()) {
+            cout << "A lista está vazia." << endl;
+        } else {
+            cout << "Lista de Números:" << endl;
+            for (int num : numeros) {
+                cout << num << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    Lista minhaLista;
+
+    int opcao, numero, posicao;
+
+    do {
+        cout << "\nEscolha uma opção:\n1. Inserir\n2. Remover\n3. Imprimir\n4. Sair\n";
+        cin >> opcao;
+
+        switch (opcao) {
+            case 1:
+                cout << "Digite o número a ser inserido: ";
+                cin >> numero;
+                cout << "Digite a posição (entre 0 e " << minhaLista.numeros.size() << "): ";
+                cin >> posicao;
+                minhaLista.inserirNumero(numero, posicao);
+                break;
+            case 2:
+                cout << "Digite a posição do número a ser removido (entre 0 e " << minhaLista.numeros.size() - 1 << "): ";
+                cin >> posicao;
+                minhaLista.removerNumero(posicao);
+                break;
+            case 3:
+                minhaLista.imprimirLista();
+                break;
+            case 4:
+                cout << "Encerrando o programa." << endl;
+                break;
+            default:
+                cout << "Opção inválida. Tente novamente." << endl;
+        }
+    } while (opcao != 4);
+
+    return 0;
+}
